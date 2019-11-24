@@ -1,7 +1,7 @@
 import React from "react";
-import classes from "./BurgerIngredient.module.css";
-import { IngredientType } from "../../../constants/enums";
 import PropTypes from "prop-types";
+import { IngredientType } from "../../../constants/enums";
+import classes from "./BurgerIngredient.module.css";
 
 const BurgerIngredient = ({ type }) => (
   <div className={classes[type]}>
