@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./BurgerIngredient.module.css";
 import { IngredientType } from "../../../constants/enums";
+import PropTypes from "prop-types";
 
 const BurgerIngredient = ({ type }) => (
   <div className={classes[type]}>
@@ -12,5 +13,9 @@ const BurgerIngredient = ({ type }) => (
     )}
   </div>
 );
+
+BurgerIngredient.propTypes = {
+  type: PropTypes.string.isRequired
+};
 
 export default BurgerIngredient;
