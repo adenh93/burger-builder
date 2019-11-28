@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Burger from "../../components/Burger";
 import { IngredientType } from "../../constants/enums";
+import Burger from "../../components/Burger";
+import BuildControls from "../../components/Burger/BuildControls";
 
 class BurgerBuilder extends Component {
   state = {
@@ -19,7 +20,7 @@ class BurgerBuilder extends Component {
     return (
       <>
         <Burger ingredients={ingredients} />
-        <div>Build Controls</div>
+        <BuildControls />
       </>
     );
   }
