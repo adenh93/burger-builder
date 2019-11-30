@@ -15,21 +15,28 @@ const BuildControls = ({
   addIngredient,
   removeIngredient,
   enabledControls
-}) => (
-  <div className={classes.BuildControls}>
-    <p>
-      Current Price: <strong>${price.toFixed(2)}</strong>
-    </p>
-    {controls.map((control, index) => (
-      <BuildControl
-        key={index}
-        {...control}
-        addIngredient={addIngredient}
-        removeIngredient={removeIngredient}
-        disabled={!enabledControls[control.type]}
-      />
-    ))}
-  </div>
-);
+}) => {
+  const disablePurchase = !Object.keys(enabledControls).length;
+
+  return (
+    <div className={classes.BuildControls}>
+      <p>
+        Current Price: <strong>${price.toFixed(2)}</strong>
+      </p>
+      {controls.map((control, index) => (
+        <BuildControl
+          key={index}
+          {...control}
+          addIngredient={addIngredient}
+          removeIngredient={removeIngredient}
+          disabled={!enabledControls[control.type]}
+        />
+      ))}
+      <button className={classes.OrderButton} disabled={disablePurchase}>
+        ORDER NOW
+      </button>
+    </div>
+  );
+};
 
 export default BuildControls;

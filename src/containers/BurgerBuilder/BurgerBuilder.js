@@ -6,7 +6,7 @@ import { INGREDIENT_PRICES } from "../../constants/ingredientPrices";
 class BurgerBuilder extends Component {
   state = {
     ingredients: [],
-    totalPrice: 0
+    totalPrice: 1.75
   };
 
   addIngredientHandler = type => {
