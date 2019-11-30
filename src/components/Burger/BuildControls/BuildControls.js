@@ -1,15 +1,20 @@
 import React from "react";
 import classes from "./BuildControls.module.css";
 import BuildControl from "./BuildControl/BuildControl";
+import { IngredientType } from "../../../constants/enums";
 
 const controls = [
-  { label: "Salad", type: "Salad" },
-  { label: "Bacon", type: "Bacon" },
-  { label: "Meat", type: "Meat" },
-  { label: "Cheese", type: "Cheese" }
+  { label: "Salad", type: IngredientType.SALAD },
+  { label: "Bacon", type: IngredientType.BACON },
+  { label: "Meat", type: IngredientType.MEAT },
+  { label: "Cheese", type: IngredientType.CHEESE }
 ];
 
-const BuildControls = ({ addIngredient, removeIngredient }) => (
+const BuildControls = ({
+  addIngredient,
+  removeIngredient,
+  enabledControls
+}) => (
   <div className={classes.BuildControls}>
     {controls.map((control, index) => (
       <BuildControl
@@ -17,6 +22,7 @@ const BuildControls = ({ addIngredient, removeIngredient }) => (
         {...control}
         addIngredient={addIngredient}
         removeIngredient={removeIngredient}
+        disabled={!enabledControls[control.type]}
       />
     ))}
   </div>

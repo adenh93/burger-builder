@@ -19,29 +19,37 @@ class BurgerBuilder extends Component {
         )
       : [...ingredients, { type, amount: 1 }];
 
-    const price = INGREDIENT_PRICES[type];
-
     this.setState({
       ingredients: newIngredients,
-      totalPrice: totalPrice + price
+      totalPrice: totalPrice + INGREDIENT_PRICES[type]
     });
   };
 
   removeIngredientHandler = type => {
-    const ingredients = this.state.ingredients.map(i =>
-      i.type === type ? { ...i, amount: i.amount - 1 } : i
-    );
+    const { ingredients, totalPrice } = this.state;
+    const ingredient = ingredients.find(i => i.type === type);
 
-    const price = INGREDIENT_PRICES[type];
+    if (!ingredient || ingredient.amount <= 0) return;
+
+    ingredient.amount -= 1;
+
+    const newIngredients = ingredient.amount
+      ? ingredients.map(i => (i.type === type ? { ...ingredient } : i))
+      : ingredients.filter(i => i.type !== type);
 
     this.setState({
-      ingredients,
-      totalPrice: this.state.totalPrice - price
+      ingredients: newIngredients,
+      totalPrice: totalPrice - INGREDIENT_PRICES[type]
     });
   };
 
   render() {
     const { ingredients } = this.state;
+
+    const enabledControls = ingredients.reduce(
+      (result, { type, amount }) => amount && { ...result, [type]: true },
+      {}
+    );
 
     return (
       <>
@@ -49,6 +57,7 @@ class BurgerBuilder extends Component {
         <BuildControls
           addIngredient={this.addIngredientHandler}
           removeIngredient={this.removeIngredientHandler}
+          enabledControls={enabledControls}
         />
       </>
     );
