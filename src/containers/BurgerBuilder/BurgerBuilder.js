@@ -8,7 +8,8 @@ import { INGREDIENT_PRICES } from "../../constants/ingredientPrices";
 class BurgerBuilder extends Component {
   state = {
     ingredients: [],
-    totalPrice: 1.75
+    totalPrice: 1.75,
+    showCheckout: false
   };
 
   addIngredientHandler = type => {
@@ -45,8 +46,12 @@ class BurgerBuilder extends Component {
     });
   };
 
+  purchaseHandler = () => {
+    this.setState({ showCheckout: true });
+  };
+
   render() {
-    const { ingredients, totalPrice } = this.state;
+    const { ingredients, totalPrice, showCheckout } = this.state;
 
     const enabledControls = ingredients.reduce(
       (result, { type, amount }) => amount && { ...result, [type]: true },
@@ -55,7 +60,7 @@ class BurgerBuilder extends Component {
 
     return (
       <>
-        <Modal>
+        <Modal show={showCheckout}>
           <OrderSummary ingredients={ingredients} total={totalPrice} />
         </Modal>
         <Burger ingredients={ingredients} />
@@ -63,6 +68,7 @@ class BurgerBuilder extends Component {
           price={totalPrice}
           addIngredient={this.addIngredientHandler}
           removeIngredient={this.removeIngredientHandler}
+          purchase={this.purchaseHandler}
           enabledControls={enabledControls}
         />
       </>

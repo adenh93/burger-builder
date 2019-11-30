@@ -14,6 +14,7 @@ const BuildControls = ({
   price,
   addIngredient,
   removeIngredient,
+  purchase,
   enabledControls
 }) => {
   const disablePurchase = !Object.keys(enabledControls).length;
@@ -32,7 +33,11 @@ const BuildControls = ({
           disabled={!enabledControls[control.type]}
         />
       ))}
-      <button className={classes.OrderButton} disabled={disablePurchase}>
+      <button
+        className={classes.OrderButton}
+        disabled={disablePurchase}
+        onClick={purchase}
+      >
         ORDER NOW
       </button>
     </div>
