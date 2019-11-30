@@ -44,7 +44,7 @@ class BurgerBuilder extends Component {
   };
 
   render() {
-    const { ingredients } = this.state;
+    const { ingredients, totalPrice } = this.state;
 
     const enabledControls = ingredients.reduce(
       (result, { type, amount }) => amount && { ...result, [type]: true },
@@ -55,6 +55,7 @@ class BurgerBuilder extends Component {
       <>
         <Burger ingredients={ingredients} />
         <BuildControls
+          price={totalPrice}
           addIngredient={this.addIngredientHandler}
           removeIngredient={this.removeIngredientHandler}
           enabledControls={enabledControls}

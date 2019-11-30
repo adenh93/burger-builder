@@ -11,11 +11,15 @@ const controls = [
 ];
 
 const BuildControls = ({
+  price,
   addIngredient,
   removeIngredient,
   enabledControls
 }) => (
   <div className={classes.BuildControls}>
+    <p>
+      Current Price: <strong>${price.toFixed(2)}</strong>
+    </p>
     {controls.map((control, index) => (
       <BuildControl
         key={index}
