@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Burger from "../../components/Burger";
 import BuildControls from "../../components/Burger/BuildControls";
+import OrderSummary from "../../components/Burger/OrderSummary";
+import Modal from "../../components/UI/Modal";
 import { INGREDIENT_PRICES } from "../../constants/ingredientPrices";
 
 class BurgerBuilder extends Component {
@@ -53,6 +55,9 @@ class BurgerBuilder extends Component {
 
     return (
       <>
+        <Modal>
+          <OrderSummary ingredients={ingredients} total={totalPrice} />
+        </Modal>
         <Burger ingredients={ingredients} />
         <BuildControls
           price={totalPrice}
